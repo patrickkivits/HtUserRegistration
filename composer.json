@@ -1,5 +1,5 @@
 {
-    "name": "hrevert/ht-user-registration",
+    "name": "nocksapp/ht-user-registration",
     "description": "A Zend Framework 2 module which extends the registration feature of ZfcUser with email address verification",
     "type": "library",
     "license": "MIT",
@@ -7,7 +7,7 @@
         "zf2",
         "module"
     ],
-    "homepage": "https://github.com/hrevert/HtUserRegistration",
+    "homepage": "https://github.com/nocksapp/HtUserRegistration",
     "authors": [
         {
             "name": "Hrevert Technologies",
@@ -16,6 +16,10 @@
         {
             "name": "ojhaujjwal",
             "email": "bring2uo@gmail.com"
+        },
+        {
+            "name": "Nocks",
+            "email": "support@nocks.co"
         }
     ],
     "require": {
