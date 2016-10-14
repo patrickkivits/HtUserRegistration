@@ -133,15 +133,23 @@ class UserRegistrationService extends EventProvider implements UserRegistrationS
     /**
      * {@inheritDoc}
      */
-    public function verifyEmail(UserInterface $user, $token)
+    public function verifyEmail(UserInterface $user, $token = null)
     {
         $record = $this->getUserRegistrationMapper()->findByUser($user);
         $this->getEventManager()->trigger(__FUNCTION__, $this, array('user' => $user, 'token' => $token, 'record' => $record));
 
-        if (!$record || !$this->isTokenValid($user, $token, $record)) {
+        if($token)
+        {
+            if (!$record || !$this->isTokenValid($user, $token, $record)) {
             return false;
+            }
+            if (!$record->isResponded()) {
+                $record->setResponded(UserRegistrationInterface::EMAIL_RESPONDED);
+                $this->getUserRegistrationMapper()->update($record);
+            }
         }
-        if (!$record->isResponded()) {
+        elseif($record)
+        {
             $record->setResponded(UserRegistrationInterface::EMAIL_RESPONDED);
             $this->getUserRegistrationMapper()->update($record);
         }
