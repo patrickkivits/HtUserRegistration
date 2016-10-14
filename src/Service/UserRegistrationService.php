@@ -158,6 +158,13 @@ class UserRegistrationService extends EventProvider implements UserRegistrationS
 
         return true;
     }
+    
+    public function isVerified(UserInterface $user)
+    {
+        $record = $this->getUserRegistrationMapper()->findByUser($user);
+      
+        return $record->isResponded();
+    }
 
     /**
      * {@inheritDoc}
