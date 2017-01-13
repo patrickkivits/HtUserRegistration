@@ -27,15 +27,19 @@ class UserRegistrationController extends AbstractActionController
      * @var \HtUserRegistration\Options\ModuleOptions
      */
     protected $options;
+    
+    protected $serviceLocator;
 
     /**
      * Constructor
      *
      * @param UserRegistrationServiceInterface $userRegistrationService
+     * @param $serviceLocator
      */
-    public function __construct(UserRegistrationServiceInterface $userRegistrationService)
+    public function __construct($serviceLocator, UserRegistrationServiceInterface $userRegistrationService)
     {
         $this->userRegistrationService = $userRegistrationService;
+        $this->serviceLocator = $serviceLocator;
     }
 
     /**
@@ -152,5 +156,15 @@ class UserRegistrationController extends AbstractActionController
     protected function redirectToPostVerificationRoute()
     {
         return $this->redirect()->toRoute($this->getOptions()->getPostVerificationRoute());
+    }
+    
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+    
+    public function setServiceLocator($serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
     }
 }
