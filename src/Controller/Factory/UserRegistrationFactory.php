@@ -9,8 +9,9 @@ class UserRegistrationFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $controllers)
     {
-        $userRegistrationService = $controllers->getServiceLocator()->get('HtUserRegistration\UserRegistrationService');
+        $serviceLocator = $controllers->getServiceLocator();
+        $userRegistrationService = $serviceLocator->get('HtUserRegistration\UserRegistrationService');
 
-        return new UserRegistrationController($userRegistrationService);
+        return new UserRegistrationController($serviceLocator, $userRegistrationService);
     }
 }
